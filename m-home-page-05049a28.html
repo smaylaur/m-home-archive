@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>故事 · 金年会</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans', system-ui, -apple-system, sans-serif;
+            background: #f9f6f0;
+            color: #2e2b27;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 —— 故事开场 */
+        .hero {
+            background: linear-gradient(145deg, #1a1c1e 0%, #2d2a26 100%);
+            color: #ebe7df;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -10%;
+            width: 140%;
+            height: 160%;
+            background: radial-gradient(circle at 30% 40%, rgba(215, 190, 160, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-short {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #b8a48c;
+            margin-bottom: 0.75rem;
+            font-weight: 300;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 350;
+            font-family: 'Times New Roman', 'Noto Serif', serif;
+            letter-spacing: 2px;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #f0ebe1;
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: #cfc1b0;
+            max-width: 580px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .hero-sub em {
+            color: #e6d5be;
+            font-style: normal;
+            font-weight: 450;
+        }
+
+        /* 浅色正文区 */
+        .content-wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 3.5rem 2rem 4.5rem;
+        }
+
+        /* 承接段落 */
+        .lead {
+            font-size: 1.15rem;
+            margin-bottom: 2.8rem;
+            border-left: 4px solid #c9b49b;
+            padding-left: 1.6rem;
+            color: #3d3832;
+            font-weight: 350;
+        }
+
+        .lead a {
+            color: #7f6a51;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #d6c0a6;
+            font-weight: 450;
+            transition: color 0.2s;
+        }
+
+        .lead a:hover {
+            color: #4f3e2b;
+            text-decoration-color: #7f6a51;
+        }
+
+        /* 特点列表 —— 卡片式 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem 1.8rem;
+            margin: 3.2rem 0 1.8rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.6rem 2rem;
+            box-shadow: 0 8px 20px rgba(46, 43, 39, 0.04), 0 2px 6px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            border: 1px solid #ede8de;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(46, 43, 39, 0.06);
+            border-color: #d6cbb8;
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+            background: #f1ede6;
+            padding: 0.3rem 0.6rem;
+            border-radius: 40px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 550;
+            color: #3d3730;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: #5a534b;
+            line-height: 1.7;
+        }
+
+        /* 温和的场景段落 */
+        .scene-block {
+            background: #f4efe8;
+            border-radius: 32px;
+            padding: 2.4rem 2.2rem;
+            margin: 3rem 0 2.5rem;
+            border: 1px solid #e6ded2;
+        }
+
+        .scene-block h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            font-family: 'Times New Roman', serif;
+            color: #3d352c;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .scene-block p {
+            margin-bottom: 1rem;
+            color: #4c453c;
+        }
+
+        .scene-block a {
+            color: #7f6a51;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+            text-decoration-color: #c5b49d;
+            font-weight: 450;
+        }
+
+        .scene-block a:hover {
+            color: #3d2f21;
+        }
+
+        /* FAQ 摘要 */
+        .faq-summary {
+            margin: 3rem 0 2rem;
+            border-top: 1px dashed #dcd3c6;
+            padding-top: 2.2rem;
+        }
+
+        .faq-summary details {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee6db;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-summary summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #4f463c;
+            padding: 0.3rem 0;
+            font-size: 1rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .faq-summary summary::before {
+            content: "▹";
+            color: #b3a088;
+            font-size: 1.1rem;
+        }
+
+        .faq-summary summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-summary details[open] summary::before {
+            content: "▿";
+        }
+
+        .faq-summary p {
+            padding: 0.5rem 0 0.2rem 1.5rem;
+            color: #5b5248;
+            font-size: 0.95rem;
+        }
+
+        .faq-summary a {
+            color: #7f6a51;
+            text-decoration: underline;
+            text-decoration-color: #c9b79f;
+        }
+
+        /* 温和结尾 */
+        .gentle-footer {
+            margin-top: 4rem;
+            padding: 2rem 0 1.2rem;
+            border-top: 1px solid #e4dbce;
+            text-align: center;
+            color: #7f7468;
+            font-size: 0.95rem;
+        }
+
+        .gentle-footer span {
+            background: #e8e0d4;
+            padding: 0.1rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            color: #5f5548;
+        }
+
+        .gentle-footer a {
+            color: #7f6a51;
+            text-decoration: none;
+            border-bottom: 1px solid #d4c6b2;
+        }
+
+        .gentle-footer a:hover {
+            border-color: #7f6a51;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 640px) {
+            .hero {
+                padding: 3.8rem 1.5rem 3rem;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-sub {
+                font-size: 1rem;
+            }
+            .content-wrap {
+                padding: 2.5rem 1.2rem 3.5rem;
+            }
+            .lead {
+                font-size: 1.05rem;
+                padding-left: 1.2rem;
+            }
+            .feature-grid {
+                gap: 1.2rem;
+            }
+            .feature-card {
+                padding: 1.4rem 1.2rem 1.6rem;
+            }
+            .scene-block {
+                padding: 1.8rem 1.4rem;
+            }
+            .scene-block h2 {
+                font-size: 1.35rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 · 开场短句 -->
+    <header class="hero">
+        <div class="hero-inner">
+            <div class="hero-short">一段关于沉淀与相遇的叙述</div>
+            <h1 class="hero-title">金年会 · 故事从回望开始</h1>
+            <p class="hero-sub">
+                有些相聚，不在日程里，却在记忆里扎根。<br>
+                <em>金年会</em> 是一个坐标，也是一种缓慢流淌的温度。
+            </p>
+        </div>
+    </header>
+
+    <!-- 浅色正文区 -->
+    <main class="content-wrap">
+
+        <!-- 承接段落 —— 从关键词背后的主题内容展开 -->
+        <div class="lead">
+            人们总习惯把「年会」理解为一年一度的热闹，但若退后一步看，<a href="https://m-home-jinnianhui.com">金年会</a> 所承载的，是更长线的情谊与彼此见证。它不是瞬间的庆祝，而是一种连续性的回望——那些共同走过的日子，值得被认真装订。
+        </div>
+
+        <!-- 特点列表 —— 几处不经意的侧面 -->
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🕊️</div>
+                <h3>不限于特定日期</h3>
+                <p>真正的交汇不必卡在十二月末。金年会的内在节奏，尊重每个团队自己的时间刻度。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <h3>叙事大于形式</h3>
+                <p>比起排场，更在意每个人在其中找到属于自己的讲述——关于成长、协作与微小的突破。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>种下下一季的线索</h3>
+                <p>好的相聚不会结束，它会把能量悄悄放进日常的缝隙里，成为下一次出发的养分。</p>
+            </div>
+        </div>
+
+        <!-- 场景段落 —— 温和、具体 -->
+        <div class="scene-block">
+            <h2>在平常的间隙里，也有金年会的光泽</h2>
+            <p>某次临时起意的午后茶话，几个人聊起一年里最被触动的瞬间；或者一次没有议程的散步，却把积压的误解轻轻解开。这些细小而诚实的交流，正是 <a href="https://m-home-jinnianhui.com">金年会</a> 在宏大定义之外的日常表情。</p>
+            <p>它不要求盛装，也不预设流程。只需要一点愿意停下来、好好听彼此说话的耐心。金年会的底色，就是这样一种从容的在场感。</p>
+        </div>
+
+        <!-- FAQ 摘要 —— 克制、自然 -->
+        <div class="faq-summary">
+            <details>
+                <summary>金年会的「金」字，指向什么？</summary>
+                <p>更多是一种质感上的比喻——并非贵重，而是耐得住时间、不易褪色的联结。就像一本旧书里夹着的干花，颜色淡了，但轮廓还在。</p>
+            </details>
+            <details>
+                <summary>适合怎样的人或团体？</summary>
+                <p>任何珍视共同经历、又不想被固定模板束缚的团队或社群。无论是三五好友，还是二三十人的工作室，都能找到自己的语调节奏。更多想法可以在 <a href="https://m-home-jinnianhui.com">金年会</a> 的主页上慢慢感受。</p>
+            </details>
+            <details>
+                <summary>一定要在年底举办吗？</summary>
+                <p>不一定。金年会的精神更接近「季节性的回顾」——这个季节由参与者自己决定。春天做一次播下种子的对谈，秋天做一次晒谷场式的分享，都很合适。</p>
+            </details>
+        </div>
+
+        <!-- 温和结尾 -->
+        <div class="gentle-footer">
+            <span>· 故事还在继续 ·</span>
+            <p style="margin-top: 1.2rem; font-size: 0.95rem;">
+                如果你也相信，相聚可以不必喧哗，或许 <a href="https://m-home-jinnianhui.com">金年会</a> 是一个可以慢慢翻阅的角落。
+            </p>
+            <p style="margin-top: 0.8rem; color: #8f8476; font-size: 0.8rem; letter-spacing: 1px;">
+                —— 每一次认真的回望，都是金年会的序章 ——
+            </p>
+        </div>
+
+    </main>
+</body>
+</html>
